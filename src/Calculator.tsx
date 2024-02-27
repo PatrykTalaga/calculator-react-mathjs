@@ -32,7 +32,7 @@ export default function Calculator() {
   function handleCalculate() {
     setResultStatus(true);
     try {
-      const result = evaluate(display).toString();
+      const result = evaluate(display).toFixed(3);
       setResult(result);
       setHistory([...history, `${display} = ${result}`]);
     } catch (err) {
@@ -45,6 +45,7 @@ export default function Calculator() {
     setDisplay("");
     setResult("");
   }
+
   function handleClearHistory() {
     setHistory([]);
   }
@@ -80,6 +81,7 @@ export default function Calculator() {
       mainContainer.style.borderRight = "none";
     }
   }
+
   function handeHiddenBtns() {
     const btnContainer = document.getElementById("hidden-buttons");
     if (btnContainer && btnContainer.style.display !== "grid") {
@@ -94,15 +96,20 @@ export default function Calculator() {
   return (
     <div className="calculator">
       <div className="main-container" id="main-container">
+        {/* display */}
         <div className="display">
           <textarea
             rows={1}
             value={display}
             onChange={(e) => setDisplay(e.target.value)}
           ></textarea>
-          <p>= {result}</p>
+          <p>
+            {result && "= "}
+            {result}
+          </p>
         </div>
 
+        {/* additional buttons */}
         <section className="buttons hidden-buttons" id="hidden-buttons">
           {/* row 1 */}
           <button onClick={() => handleOperand("^2")}>x^2</button>
@@ -123,6 +130,7 @@ export default function Calculator() {
           <button onClick={() => handleOperand(")")}>)</button>
         </section>
 
+        {/* buttons */}
         <section className="buttons">
           {/* row 1 */}
           <button onClick={() => handeHiddenBtns()}>
@@ -161,6 +169,8 @@ export default function Calculator() {
           <button onClick={() => handleOperand("+")}>+</button>
         </section>
       </div>
+
+      {/* history */}
       <div className="side-container" id="side-container">
         <button className="danger-button" onClick={() => handleClearHistory()}>
           Clear History

@@ -1,3 +1,4 @@
+/* style for scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -22,51 +23,52 @@
 }
 
 .calculator {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   max-height: 700px;
   padding: 2rem 0;
   background-color: hsla(0, 0%, 7%, 0.986);
   border: 2px solid hsla(0, 0%, 7%, 0.986);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   color: hsla(0, 0%, 100%, 0.925);
 }
 
 .main-container {
-  width: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 350px;
   padding: 0 20px;
   border-right: none;
 }
 
+/* display */
 .display {
   display: flex;
   flex-direction: column;
   justify-content: end;
   align-items: end;
+  min-height: 7rem;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch; /* Smoother scrolling for touch devices */
   margin-bottom: 1.5rem;
   padding: 0.5rem 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid white;
   font-size: 3rem;
   text-align: end;
-  min-height: 7rem;
-  border-bottom: 2px solid white;
-  padding-bottom: 1rem;
 }
 .display textarea {
   width: 95%;
   resize: none;
   margin: 0;
+  padding: 0.5rem;
   background-color: black;
   color: white;
   border: none;
   font-size: 3rem;
   text-align: end;
   vertical-align: bottom;
-  padding: 0.5rem;
 }
 .display textarea:focus {
   outline: 2px solid hsla(224, 97%, 54%, 0.932);
@@ -80,6 +82,7 @@
   color: hsla(224, 97%, 54%, 0.932);
 }
 
+/* main buttons */
 .buttons {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -107,7 +110,11 @@ button:focus-visible {
   color: hsla(224, 97%, 54%, 0.932);
   border-color: hsla(224, 97%, 54%, 0.932);
 }
+.enter-button {
+  grid-column: span 2;
+}
 
+/* additional buttons */
 .hidden-buttons {
   display: none;
   margin-bottom: 1rem;
@@ -118,27 +125,23 @@ button:focus-visible {
   font-size: 1rem;
 }
 
-.enter-button {
-  grid-column: span 2;
-}
-
+/* history */
 .side-container {
+  display: none;
   flex-direction: column;
   justify-content: start;
   align-items: center;
   margin-bottom: auto;
+  padding: 0.75rem;
   min-width: 200px;
+  max-width: 350px;
   max-height: 700px;
   background-color: hsla(0, 0%, 7%, 0.986);
-  display: none;
-  padding: 0.75rem;
-  max-width: 350px;
   font-size: 2rem;
   text-align: start;
   overflow: auto; /* Show scrollbar only when needed */
   -webkit-overflow-scrolling: touch; /* Smoother scrolling for touch devices (optional) */
 }
-
 .danger-button {
   padding: 0.5rem 0.75rem;
   margin-left: auto;
@@ -147,17 +150,16 @@ button:focus-visible {
   background-color: black;
   border-radius: 10px;
   border: 1px solid transparent;
+  box-shadow: 0 0 10px transparent;
   cursor: pointer;
   transition: border-color 0.25s;
   transition: background-color 0.25s;
-  box-shadow: 0 0 10px transparent; /* Example glow - adjust color and spread */
 }
 .danger-button:hover {
   border-color: hsla(352, 97%, 54%, 0.932);
   background-color: hsl(0, 0%, 15%);
   animation: glowing-red 2s ease-in-out infinite;
 }
-
 .side-container ul {
   list-style-type: none;
   margin: 0;
@@ -170,6 +172,7 @@ button:focus-visible {
   border-bottom: 1px solid white;
 }
 
+/* animations */
 @keyframes glowing {
   0% {
     box-shadow: 0 0 10px hsla(224, 97%, 54%, 0.932);
@@ -193,6 +196,7 @@ button:focus-visible {
   }
 }
 
+/* light mode */
 @media (prefers-color-scheme: light) {
   .calculator {
     background-color: hsla(0, 0%, 100%, 0.925); /* Light background */
