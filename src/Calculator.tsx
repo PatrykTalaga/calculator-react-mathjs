@@ -57,18 +57,32 @@ export default function Calculator() {
   function handleHistory() {
     const sideContainer = document.getElementById("side-container");
     const mainContainer = document.getElementById("main-container");
+    const calculatorContainer = document.getElementById("calculator");
+    const screenWidth = window.innerWidth; //Get Screensize
+    const prefersLightTheme = window.matchMedia(
+      "(prefers-color-scheme: light)"
+    ).matches; // Check for the user's color-scheme preference
+
+    //make visible
     if (
       sideContainer &&
       mainContainer &&
       sideContainer.style.display !== "flex"
     ) {
       sideContainer.style.display = "flex";
-      // Check for the user's color-scheme preference
-      const prefersLightTheme = window.matchMedia(
-        "(prefers-color-scheme: light)"
-      ).matches;
 
-      // Add the light-theme class if the user prefers a light theme
+      //for mobile
+      if (screenWidth <= 480 && calculatorContainer) {
+        calculatorContainer.style.flexDirection = "column";
+        if (prefersLightTheme) {
+          mainContainer.style.borderBottom = "2px solid hsla(0, 0%, 7%, 0.986)";
+          return;
+        }
+        mainContainer.style.borderBottom = "2px solid white";
+        return;
+      }
+
+      //for desktop
       if (prefersLightTheme) {
         mainContainer.style.borderRight = "2px solid hsla(0, 0%, 7%, 0.986)";
         return;
@@ -76,9 +90,13 @@ export default function Calculator() {
       mainContainer.style.borderRight = "2px solid white";
       return;
     }
-    if (sideContainer && mainContainer) {
+
+    //make invisible
+    if (sideContainer && mainContainer && calculatorContainer) {
       sideContainer.style.display = "none";
       mainContainer.style.borderRight = "none";
+      mainContainer.style.borderBottom = "none";
+      calculatorContainer.style.flexDirection = "row";
     }
   }
 
@@ -93,12 +111,25 @@ export default function Calculator() {
     }
   }
 
+  //event listeners
+  const mainDisplay = document.getElementById("main-display"); // Replace with your textarea's ID
+
+  if (mainDisplay) {
+    mainDisplay.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        handleCalculate();
+      }
+    });
+  }
+
   return (
-    <div className="calculator">
+    <div className="calculator" id="calculator">
       <div className="main-container" id="main-container">
         {/* display */}
         <div className="display">
           <textarea
+            id="main-display"
             rows={1}
             value={display}
             onChange={(e) => setDisplay(e.target.value)}
