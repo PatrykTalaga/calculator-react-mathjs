@@ -1,3 +1,7 @@
+:root {
+  background-color: hsla(0, 0%, 0%, 0.767);
+}
+
 /* style for scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -37,7 +41,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 350px;
+  max-width: 350px;
   padding: 0 20px;
   border-right: none;
 }
@@ -144,7 +148,6 @@ button:focus-visible {
 }
 .danger-button {
   padding: 0.5rem 0.75rem;
-  margin-left: auto;
   font-size: 2rem;
   color: hsla(0, 0%, 100%, 0.925);
   background-color: black;
@@ -198,6 +201,10 @@ button:focus-visible {
 
 /* light mode */
 @media (prefers-color-scheme: light) {
+  :root {
+    background-color: hsla(0, 0%, 0%, 0.035);
+  }
+
   .calculator {
     background-color: hsla(0, 0%, 100%, 0.925); /* Light background */
     color: hsla(0, 0%, 7%, 0.986); /* Dark text for contrast */
